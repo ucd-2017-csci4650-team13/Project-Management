@@ -4,9 +4,11 @@
 
 syms x;
 Tol = 0.00000001;
-fxn = input('Give an equation in x: ');%,'s');
+infxn = input('Give an equation in x: ');%,'s');
+fxn = matlabFunction(infxn)
 x = input('Enter the initial guess: ');
-fprime = diff(fxn)
+infprime = diff(infxn);
+fprime = matlabFunction(infprime)
 %fx = subs(fxn)
 %fprimex = subs(fprime)
 %xip1 = x - fx/fprimex
@@ -17,8 +19,8 @@ fprintf('step       x           dx         f(x)\n');
 fprintf('----   ---------   -----------   ----------\n');
 
 while (dx > Tol || abs(fx) > Tol)
-    fx = subs(fxn);
-    fprimex = subs(fprime);
+    fx = feval(fxn, x)
+    fprimex = feval(fprime, x)
     xip1 = x - (fx/fprimex);
     fprintf('%3i %12.8f %12.8f %12.8f\n', i, x, dx, xip1);
     dx = abs(x-xip1);
@@ -26,5 +28,5 @@ while (dx > Tol || abs(fx) > Tol)
     i = i + 1;
 end
 
-backwarderror = subs(fxn);
+backwarderror = abs(fxn(x));
 fprintf('Backward error = %12.8f\n', backwarderror);
