@@ -1,3 +1,7 @@
+%TODO
+% Handle case where fprimex = 0
+% Get different function type for performance issue/script hanging
+
 syms x;
 Tol = 0.00000001;
 fxn = input('Give an equation in x: ');%,'s');
